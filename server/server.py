@@ -2,7 +2,7 @@ import asyncio
 import websockets
 
 async def connect(websocket):
-    print(websocket)
+    print("connection from", websocket)
 
 async def message_handler(websocket, path):
     try:
