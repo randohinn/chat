@@ -1,9 +1,6 @@
 import asyncio
 import websockets
 
-async def connect(websocket):
-    print("connection from", websocket)
-
 async def message_handler(websocket, path):
     try:
         async for message in websocket:
@@ -26,7 +23,7 @@ async def handler(websocket, path):
 
 if __name__ == '__main__':
     print("Starting chat server")
-    start_server = websockets.serve(handler, '0.0.0.0', 8080)
+    start_server = websockets.serve(handler, 'chat.randohinn.com', 8080)
 
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
