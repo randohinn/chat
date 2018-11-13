@@ -1,0 +1,7 @@
+{
+    'type': 'message',
+    'channel': 'general',
+    'sender_id': 0,
+    'content': "Tere, maailm!",
+    'timestamp': "2018-11-13-12:18:55"
+}
