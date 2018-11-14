@@ -26,8 +26,6 @@ async def message_handler(websocket, path):
             db.entries.insert_one(ast.literal_eval(message))
             await send_message(message)
     except websockets.exceptions.ConnectionClosed:
-        print("Connection closed")
-    finally:
         await disconnect(websocket)
 
 async def handler(websocket, path):
