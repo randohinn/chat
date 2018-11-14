@@ -28,7 +28,7 @@ async def message_handler(websocket, path):
     except websockets.exceptions.ConnectionClosed:
         print("Connection closed")
     finally:
-        disconnect(websocket)
+        await disconnect(websocket)
 
 async def handler(websocket, path):
     consumer_task = asyncio.ensure_future(
