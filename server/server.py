@@ -24,10 +24,11 @@ async def message_handler(websocket, path):
     try:
         async for message in websocket:
             msg_dict = ast.literal_eval(message)
-            if msg_dict.type == "message":
+            print(msg_dict)
+            if msg_dict['type'] == "message":
                 db.entries.insert_one(msg_dict)
                 await send_message(message)
-            elif msg_dict.type == "auth":
+            elif msg_dict['type'] == "auth":
                 # Autendi siin.
                 print("Auth")
     except websockets.exceptions.ConnectionClosed:
