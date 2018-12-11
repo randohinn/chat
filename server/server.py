@@ -29,6 +29,7 @@ async def message_handler(websocket, path):
                 await send_message(message)
             elif msg_dict.type == "auth":
                 # Autendi siin.
+                print("Auth")
     except websockets.exceptions.ConnectionClosed:
         await disconnect(websocket)
 
