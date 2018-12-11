@@ -23,8 +23,12 @@ async def message_handler(websocket, path):
     await join(websocket)
     try:
         async for message in websocket:
-            db.entries.insert_one(ast.literal_eval(message))
-            await send_message(message)
+            msg_dict = ast.literal_eval(message)
+            if msg_dict.type == "message":
+                db.entries.insert_one(msg_dict)
+                await send_message(message)
+            elif msg_dict.type == "auth":
+                # Autendi siin.
     except websockets.exceptions.ConnectionClosed:
         await disconnect(websocket)
 
