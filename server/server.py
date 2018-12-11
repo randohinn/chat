@@ -18,13 +18,11 @@ async def send_message(message):
     if users:  # asyncio.wait doesn't accept an empty list
         await asyncio.wait([user.send(message) for user in users])
 
-
 async def message_handler(websocket, path):
     await join(websocket)
     try:
         async for message in websocket:
             msg_dict = ast.literal_eval(message)
-            print(msg_dict)
             if msg_dict['type'] == "message":
                 db.entries.insert_one(msg_dict)
                 await send_message(message)

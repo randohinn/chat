@@ -5,3 +5,11 @@
     'content': "Tere, maailm!",
     'timestamp': "2018-11-13-12:18:55"
 }
+
+{
+    'type': 'auth',
+    'channel': 'auth',
+    'user_name': 'rando',
+    'uuid': "hex(uuid.getnode()) tulemus"
+    'timestamp': "2018-11-13-12:18:55"
+}
