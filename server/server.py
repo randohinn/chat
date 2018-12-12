@@ -5,11 +5,15 @@ from pymongo import MongoClient
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client.messages
+auth = client.users
 
 users = set()
 
 async def join(websocket):
     users.add(websocket)
+    message_history = db.entries.find().sort({$natural: -1}).limit(20);
+    for message in message_history:
+        await asyncio.wait([user.send(message) for user in users])
 
 async def disconnect(websocket):
     users.remove(websocket)
@@ -27,8 +31,10 @@ async def message_handler(websocket, path):
                 db.entries.insert_one(msg_dict)
                 await send_message(message)
             elif msg_dict['type'] == "auth":
-                # Autendi siin.
-                print("Auth")
+                # Vajab uuid kontrolli veel
+                response = {}
+                response["status"] = "OK"
+                await websocket.send(response)
     except websockets.exceptions.ConnectionClosed:
         await disconnect(websocket)
 

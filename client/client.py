@@ -17,7 +17,6 @@ message = {'type': 'message', 'channel': 'general', 'sender_id': id, 'content': 
 
 async def msg():
     async with websockets.connect('ws://chat.randohinn.com:8080') as websocket:
-
         await websocket.send(str(message))
         msg = await websocket.recv()
         print(msg)
