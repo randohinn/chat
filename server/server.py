@@ -13,6 +13,7 @@ async def join(websocket):
     users.add(websocket)
     message_history = db.entries.find().sort('_id', -1).limit(20);
     for message in message_history:
+        print(message_history)
         await asyncio.wait([user.send(message) for user in users])
 
 async def disconnect(websocket):

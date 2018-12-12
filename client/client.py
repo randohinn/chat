@@ -20,6 +20,8 @@ async def msg():
         await websocket.send(str(message))
         msg = await websocket.recv()
         print(msg)
+        await websocket.send(str(message))
+
 
 if __name__ == '__main__':
     asyncio.get_event_loop().run_until_complete(msg())
