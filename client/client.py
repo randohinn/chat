@@ -71,17 +71,14 @@ async def run():
 
 async def actually_send(websocket):
     global message_out
-    print(type(message_out))
     if isinstance(message_out,dict):
         await websocket.send(str(message_out))
         message_out = ""
-        print("snet")
 
 async def recieve(websocket):
     global all_messages
     try:
         msg = await websocket.recv()
-        print(msg)
         message = ast.literal_eval(msg)
         all_messages.append(message)
         sender_id = window.canvas.create_text(10, 10+(64*(len(all_messages)-1)), anchor="nw", font=('Arial Bold', 10))
