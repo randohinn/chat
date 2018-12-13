@@ -2,6 +2,7 @@ import asyncio
 import websockets
 import ast
 from pymongo import MongoClient
+from pymongo import ASCENDING
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client.messages
@@ -11,8 +12,11 @@ users = set()
 
 async def join(websocket):
     users.add(websocket)
-    message_history = db.entries.find().sort('_id', -1).limit(20);
-    for message in message_history:
+    message_history = db.entries.find().sort('timestamp', -1).limit(20)
+    hist_list = list(message_history)
+    hist_list.reverse()
+    for message in hist_list:
+        del message['_id']
         await asyncio.wait([user.send(str(message)) for user in users])
 
 async def disconnect(websocket):
