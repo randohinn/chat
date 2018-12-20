@@ -26,11 +26,10 @@ class App(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         #self.title("Chat - Programmmeerimise projekt")
-        self.minsize(800,600)
-        self.maxsize(800,600)
+        self.minsize(1280,720)
         label = tk.Label(self, text="Hello World")
         #label.pack()
-        self.canvas = tk.Canvas(self, scrollregion=(0,0,800,4200))
+        self.canvas = tk.Canvas(self, scrollregion=(0,0,1280,4200))
         self.vbar=tk.Scrollbar(self,orient=tk.VERTICAL)
         self.vbar.grid(row=0, column=2, sticky="ns")
         self.vbar.config(command=self.canvas.yview)
@@ -42,7 +41,7 @@ class App(tk.Tk):
         send_button = tk.Button(self, text="Saada", command=self.send_click)
         send_button.grid(row=1, column=1)
 
-        self.message_text = tk.Entry(self, font=("Arial", 12))
+        self.message_text = tk.Entry(self, font=("Helvetica", 12))
         self.message_text.grid(row=1, column=0, sticky="we")
 
         self.canvas.grid(row=0, column=0, sticky="wesn")
@@ -60,8 +59,8 @@ class App(tk.Tk):
         global prev_len
         if(len(all_messages) > prev_len):
             prev_len = len(all_messages)
-            sender_id = window.canvas.create_text(10, 10+(64*(len(all_messages)-1)), anchor="nw", font=('Arial Bold', 10))
-            message_text = window.canvas.create_text(10, 30+(64*(len(all_messages)-1)), anchor="nw")
+            sender_id = window.canvas.create_text(10, 10+(64*(len(all_messages)-1)), anchor="nw", font=('Helvetica', 10,'bold'))
+            message_text = window.canvas.create_text(10, 38+(64*(len(all_messages)-1)), anchor="nw")
 
             window.canvas.itemconfig(sender_id, text=str(all_messages[-1]['sender_id'])+"    @     "+str(all_messages[-1]['timestamp']))
             window.canvas.itemconfig(message_text, text=str(all_messages[-1]['content']))

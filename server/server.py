@@ -34,7 +34,7 @@ async def message_handler(websocket, path):
             if msg_dict['type'] == "message":
                 db.entries.insert_one(msg_dict)
                 await send_message(message)
-            elif msg_dict['type'] == "auth":
+            elif msg_dict['type'] == "auth": #todo post-beta
                 # Vajab uuid kontrolli veel
                 response = {}
                 response["status"] = "OK"
